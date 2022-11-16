@@ -52,6 +52,7 @@ AuthService.Login = async (req, res) => {
           expiresIn: '30d'
         })
         res.status(200).send({
+          id: user._id,
           accessToken: token
         })
       })
