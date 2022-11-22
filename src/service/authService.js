@@ -32,7 +32,7 @@ AuthService.Login = async (req, res) => {
     User.findOne({ username: req.body.username })
       .exec((err, user) => {
         if (err) {
-          res.status(500).send(err)
+          res.status(500).send({ message: err })
           return
         }
         if (!user) {
