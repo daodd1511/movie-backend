@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   const token =
     req.body.token || req.query.token || req.headers['x-access-token']
   if (!token) {
-    return res.status(403).send('A token is required for authentication')
+    return res.status(403).send({ message: 'A token is required for authentication' })
   }
   try {
     jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
       return next()
     })
   } catch (err) {
-    return res.status(401).send('Invalid Token')
+    return res.status(401).send({ message: 'Invalid Token' })
   }
 }
 
@@ -28,7 +28,7 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
       return
     }
     if (user) {
-      res.status(400).send('Username is already in use')
+      res.status(400).send({ message: 'Username is already in use' })
       return
     }
     // Email
@@ -38,7 +38,7 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
         return
       }
       if (user) {
-        res.status(400).send('Email is already in use')
+        res.status(400).send({ message: 'Email is already in use' })
         return
       }
       next()

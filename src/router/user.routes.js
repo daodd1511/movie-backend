@@ -10,6 +10,10 @@ userRouter.get('/:id', verifyToken, (req, res) => {
 userRouter.put('/update/:id', verifyToken, (req, res) => {
   UserController.updateUser(req, res)
 })
+
+userRouter.get('/profile', verifyToken, (req, res) => {
+  UserController.getUserById(req, res)
+})
 // userRouter.delete(
 //   '/delete/:id',
 //   [auth.verifyToken],
