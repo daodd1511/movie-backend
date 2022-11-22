@@ -4,9 +4,9 @@ import express from 'express'
 
 const userRouter = express.Router()
 
-userRouter.get('/:id', verifyToken, (req, res) => {
-  UserController.getUserById(req, res)
-})
+// userRouter.get('/:id', verifyToken, (req, res) => {
+//   UserController.getUserById(req, res)
+// })
 userRouter.put('/update/:id', verifyToken, (req, res) => {
   UserController.updateUser(req, res)
 })
