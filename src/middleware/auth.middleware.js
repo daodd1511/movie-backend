@@ -2,12 +2,13 @@ import jwt from 'jsonwebtoken'
 import User from '../model/user.js'
 
 const verifyToken = (req, res, next) => {
-  const token =
-    req.body.token || req.query.token || req.headers['x-access-token']
-  if (!token) {
-    return res.status(403).send({ message: 'A token is required for authentication' })
-  }
   try {
+    const authHeader = req.headers.authorization
+    if (!authHeader) {
+      res.status(401).send({ message: 'No token provided' })
+      return
+    }
+    const token = authHeader.split(' ')[1]
     jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: 'Unauthorized' })

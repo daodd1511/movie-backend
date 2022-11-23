@@ -17,9 +17,7 @@ ListService.getListById = async (id) => {
 ListService.create = async (listDetail) => {
   const list = new List({
     name: listDetail.name,
-    description: listDetail.description,
-    movies: listDetail.movies,
-    tvs: listDetail.tvs
+    description: listDetail.description
   })
   return await list.save()
 }
@@ -55,19 +53,19 @@ ListService.removeMovie = async (listId, movieId) => {
 
 ListService.addTv = async (listId, tvId) => {
   const list = await List.findOne({ _id: listId })
-  if (list.tvs.includes(tvId)) {
+  if (list.tvShows.includes(tvId)) {
     throw new Error('Tv already in list')
   } else {
-    list.tvs.push(tvId)
+    list.tvShows.push(tvId)
     return await list.save()
   }
 }
 
 ListService.removeTv = async (listId, tvId) => {
   const list = await List.findOne({ _id: listId })
-  if (list.tvs.includes(tvId)) {
-    const index = list.tvs.indexOf(tvId)
-    list.tvs.splice(index, 1)
+  if (list.tvShows.includes(tvId)) {
+    const index = list.tvShows.indexOf(tvId)
+    list.tvShows.splice(index, 1)
     return await list.save()
   } else {
     throw new Error('Tv not in list')
@@ -77,7 +75,7 @@ ListService.removeTv = async (listId, tvId) => {
 ListService.clear = async (listId) => {
   const list = await List.findOne({ _id: listId })
   list.movies = []
-  list.tvs = []
+  list.tvShows = []
   return await list.save()
 }
 export default ListService
