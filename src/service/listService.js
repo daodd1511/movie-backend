@@ -20,8 +20,8 @@ ListService.create = async (listDetail) => {
   return await list.save()
 }
 
-ListService.update = async (listDetail) => {
-  return await List.findByIdAndUpdate(listDetail._id, listDetail)
+ListService.update = async (listId, listDetail) => {
+  return await List.findByIdAndUpdate(listId, listDetail)
 }
 
 ListService.delete = async (id) => {

@@ -16,4 +16,28 @@ listRouter.get('/', verifyToken, (req, res) => {
   ListController.getAll(req, res)
 })
 
+listRouter.put('/:id', verifyToken, (req, res) => {
+  ListController.update(req, res)
+})
+
+listRouter.delete('/:id', verifyToken, (req, res) => {
+  ListController.remove(req, res)
+})
+
+listRouter.post('/:id/movie', verifyToken, (req, res) => {
+  ListController.addMovie(req, res)
+})
+
+listRouter.delete('/:id/movie', verifyToken, (req, res) => {
+  ListController.removeMovie(req, res)
+})
+
+listRouter.post('/:id/tv', verifyToken, (req, res) => {
+  ListController.addTv(req, res)
+})
+
+listRouter.delete('/:id/tv', verifyToken, (req, res) => {
+  ListController.removeTv(req, res)
+})
+
 export default listRouter

@@ -28,9 +28,69 @@ const create = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    const list = await ListService.update(req.params.id, req.body)
+    res.status(200).send(list)
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
+
+const remove = async (req, res) => {
+  try {
+    await ListService.delete(req.params.id)
+    res.status(200).send({ message: 'List deleted successfully' })
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
+
+const addMovie = async (req, res) => {
+  try {
+    const list = await ListService.addMovie(req.params.id, req.body.mediaId)
+    res.status(200).send(list)
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
+
+const removeMovie = async (req, res) => {
+  try {
+    const list = await ListService.removeMovie(req.params.id, req.body.mediaId)
+    res.status(200).send(list)
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
+
+const addTv = async (req, res) => {
+  try {
+    const list = await ListService.addTv(req.params.id, req.body.mediaId)
+    res.status(200).send(list)
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
+
+const removeTv = async (req, res) => {
+  try {
+    const list = await ListService.removeTv(req.params.id, req.body.mediaId)
+    res.status(200).send(list)
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
+
 const UserController = {
   getListById,
   create,
-  getAll
+  getAll,
+  update,
+  remove,
+  addMovie,
+  removeMovie,
+  addTv,
+  removeTv
 }
 export default UserController
