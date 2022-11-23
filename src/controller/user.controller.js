@@ -6,7 +6,7 @@ const getUserById = async (req, res) => {
       res.status(200).send(user)
     })
   } catch (err) {
-    res.json({ message: 'User not found' })
+    res.status(404).send({ message: 'User not found' })
   }
 }
 const updateUser = async (req, res) => {

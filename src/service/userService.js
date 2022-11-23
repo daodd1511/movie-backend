@@ -4,7 +4,8 @@ import bcrypt from 'bcryptjs'
 const UserService = {}
 
 UserService.getUserById = async (id) => {
-  return await User.findOne({ _id: id }).select('-password')
+  const result = await User.findOne({ _id: id }).select('-password')
+  return result
 }
 UserService.update = async (id, updateData) => {
   if (updateData.password) {
