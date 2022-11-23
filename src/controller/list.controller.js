@@ -11,11 +11,11 @@ const getAll = async (req, res) => {
 
 const getListById = async (req, res) => {
   try {
-    await ListService.getListById(req.params.id).then((list) => {
-      res.status(200).send(list)
-    })
-  } catch (err) {
-    res.json({ message: 'List not found!' })
+    const list = await ListService.getListById(req.params.id)
+    console.log(list)
+    res.status(200).send(list)
+  } catch (error) {
+    res.status(404).send({ message: error.message })
   }
 }
 

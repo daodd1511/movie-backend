@@ -7,7 +7,11 @@ ListService.getAll = async () => {
 }
 
 ListService.getListById = async (id) => {
-  return await List.findOne({ _id: id })
+  const list = await List.findOne({ _id: id })
+  if (!list) {
+    throw new Error('List not found')
+  }
+  return list
 }
 
 ListService.create = async (listDetail) => {
