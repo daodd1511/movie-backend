@@ -45,7 +45,7 @@ AuthService.Login = async (req, res) => {
         if (!passwordIsValid) {
           return res.status(401).send({
             accessToken: null,
-            message: 'Invalid Password!'
+            message: 'Invalid Credential!'
           })
         }
         const token = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, {
