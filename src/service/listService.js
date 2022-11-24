@@ -2,9 +2,10 @@ import UserService from './userService.js'
 
 const ListService = {}
 
-// ListService.getAll = async () => {
-//   return await List.find()
-// }
+ListService.getAll = async (userId) => {
+  const user = await UserService.getUserById(userId)
+  return user.lists
+}
 
 ListService.getListById = async (userId, id) => {
   const user = await UserService.getUserById(userId)

@@ -1,13 +1,13 @@
 import ListService from '../service/listService.js'
 
-// const getAll = async (req, res) => {
-//   try {
-//     const lists = await ListService.getAll()
-//     res.status(200).send(lists)
-//   } catch (error) {
-//     res.status(400).send({ message: error.message })
-//   }
-// }
+const getAll = async (req, res) => {
+  try {
+    const lists = await ListService.getAll(req.userId)
+    res.status(200).send(lists)
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
 
 const getListById = async (req, res) => {
   try {
@@ -94,7 +94,7 @@ const clear = async (req, res) => {
 const UserController = {
   getListById,
   create,
-  // getAll,
+  getAll,
   update,
   remove,
   addMovie,
