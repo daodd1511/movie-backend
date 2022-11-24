@@ -9,7 +9,6 @@ ListService.getAll = async (userId) => {
 
 ListService.getListById = async (userId, id) => {
   const user = await UserService.getUserById(userId)
-  console.log(user.lists)
   const list = user.lists.find((list) => list._id.toString() === id)
   if (!list) {
     throw new Error('List not found')
@@ -20,8 +19,7 @@ ListService.getListById = async (userId, id) => {
 ListService.create = async (userId, listDetail) => {
   const user = await UserService.getUserById(userId)
   user.lists.push(listDetail)
-  await user.save()
-  return user.lists.find((list) => list._id.toString() === listDetail._id)
+  return await UserService.update(userId, user)
 }
 
 ListService.update = async (userId, listId, listDetail) => {
@@ -37,7 +35,7 @@ ListService.update = async (userId, listId, listDetail) => {
     }
     return list
   })
-  await user.save()
+  await UserService.update(userId, user)
   return newList
 }
 
@@ -48,7 +46,7 @@ ListService.delete = async (userId, id) => {
     throw new Error('List not found')
   }
   user.lists = user.lists.filter((list) => list._id.toString() !== id)
-  await user.save()
+  await UserService.update(userId, user)
 }
 
 ListService.addMovie = async (userId, listId, movieId) => {
@@ -61,7 +59,7 @@ ListService.addMovie = async (userId, listId, movieId) => {
     throw new Error('Movie already in list')
   }
   list.movies.push(movieId)
-  await user.save()
+  await UserService.update(userId, user)
   return list
 }
 
@@ -75,7 +73,7 @@ ListService.removeMovie = async (userId, listId, movieId) => {
     throw new Error('Movie not in list')
   }
   list.movies = list.movies.filter((movie) => movie !== movieId)
-  await user.save()
+  await UserService.update(userId, user)
   return list
 }
 
@@ -89,7 +87,7 @@ ListService.addTv = async (userId, listId, tvId) => {
     throw new Error('Tv already in list')
   }
   list.tvShows.push(tvId)
-  await user.save()
+  await UserService.update(userId, user)
   return list
 }
 
@@ -103,7 +101,7 @@ ListService.removeTv = async (userId, listId, tvId) => {
     throw new Error('Tv not in list')
   }
   list.tvShows = list.tvShows.filter((tv) => tv !== tvId)
-  await user.save()
+  await UserService.update(userId, user)
   return list
 }
 
@@ -115,7 +113,7 @@ ListService.clear = async (userId, listId) => {
   }
   list.movies = []
   list.tvShows = []
-  await user.save()
+  await UserService.update(userId, user)
   return list
 }
 export default ListService

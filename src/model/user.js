@@ -16,7 +16,7 @@ const userSchema = new Schema({
   email: { type: String, unique: true },
   password: { type: String, nullable: false },
   gender: { type: String },
-  lists: [{ type: listSchema, default: {} }]
+  lists: [listSchema]
   // role: { type: mongoose.Schema.Types.ObjectId, ref: "role" },
 })
 const User = mongoose.model('user', userSchema)

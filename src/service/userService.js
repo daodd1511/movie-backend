@@ -14,10 +14,10 @@ UserService.update = async (id, updateData) => {
   } else {
     await User.findByIdAndUpdate(id, updateData)
   }
-  return await User.findOne({ _id: id })
+  return await User.findOne({ _id: id }).select('-password')
 }
 UserService.delete = async (id) => {
   await User.findByIdAndRemove(id)
-  return await User.find()
+  return await User.find().select('-password')
 }
 export default UserService
