@@ -4,14 +4,8 @@ const { Schema } = mongoose
 const listSchema = new Schema({
   name: { type: String, nullable: false },
   description: { type: String, default: null },
-  movies: [{
-    name: { type: String, nullable: false },
-    id: { type: Number, nullable: false }
-  }],
-  tvShows: [{
-    name: { type: String, nullable: false },
-    id: { type: Number, nullable: false }
-  }]
+  movies: [Number],
+  tvShows: [Number]
 }, { timestamps: true })
 
 const userSchema = new Schema({
