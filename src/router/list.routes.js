@@ -40,4 +40,8 @@ listRouter.delete('/:id/tv', verifyToken, (req, res) => {
   ListController.removeTv(req, res)
 })
 
+listRouter.get('/:id/clear', verifyToken, (req, res) => {
+  ListController.clear(req, res)
+})
+
 export default listRouter
