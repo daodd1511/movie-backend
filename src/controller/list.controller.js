@@ -91,6 +91,15 @@ const clear = async (req, res) => {
   }
 }
 
+const clearAll = async (req, res) => {
+  try {
+    const lists = await ListService.clearAll(req.userId)
+    res.status(200).send(lists)
+  } catch (error) {
+    res.status(400).send({ message: error.message })
+  }
+}
+
 const UserController = {
   getListById,
   create,
@@ -101,6 +110,7 @@ const UserController = {
   removeMovie,
   addTv,
   removeTv,
-  clear
+  clear,
+  clearAll
 }
 export default UserController

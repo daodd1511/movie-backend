@@ -3,6 +3,9 @@ import ListController from '../controller/list.controller.js'
 import express from 'express'
 
 const listRouter = express.Router()
+listRouter.get('/clear', verifyToken, (req, res) => {
+  ListController.clearAll(req, res)
+})
 
 listRouter.get('/:id', verifyToken, (req, res) => {
   ListController.getListById(req, res)

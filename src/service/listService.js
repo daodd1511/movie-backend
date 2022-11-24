@@ -116,4 +116,10 @@ ListService.clear = async (userId, listId) => {
   await UserService.update(userId, user)
   return list
 }
+
+ListService.clearAll = async (userId) => {
+  const user = await UserService.getUserById(userId)
+  user.lists = []
+  await UserService.update(userId, user)
+}
 export default ListService
