@@ -48,7 +48,7 @@ const remove = async (req, res) => {
 
 const addMovie = async (req, res) => {
   try {
-    const list = await ListService.addMovie(req.userId, req.params.id, req.body.mediaId)
+    const list = await ListService.addMovie(req.userId, req.params.id, req.body)
     res.status(200).send(list)
   } catch (error) {
     res.status(400).send({ message: error.message })
@@ -57,7 +57,7 @@ const addMovie = async (req, res) => {
 
 const removeMovie = async (req, res) => {
   try {
-    const list = await ListService.removeMovie(req.userId, req.params.id, req.body.mediaId)
+    const list = await ListService.removeMovie(req.userId, req.params.id, req.body)
     res.status(200).send(list)
   } catch (error) {
     res.status(400).send({ message: error.message })
@@ -66,7 +66,7 @@ const removeMovie = async (req, res) => {
 
 const addTv = async (req, res) => {
   try {
-    const list = await ListService.addTv(req.userId, req.params.id, req.body.mediaId)
+    const list = await ListService.addTv(req.userId, req.params.id, req.body)
     res.status(200).send(list)
   } catch (error) {
     res.status(400).send({ message: error.message })
@@ -75,7 +75,7 @@ const addTv = async (req, res) => {
 
 const removeTv = async (req, res) => {
   try {
-    const list = await ListService.removeTv(req.userId, req.params.id, req.body.mediaId)
+    const list = await ListService.removeTv(req.userId, req.params.id, req.body)
     res.status(200).send(list)
   } catch (error) {
     res.status(400).send({ message: error.message })

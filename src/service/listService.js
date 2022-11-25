@@ -49,58 +49,58 @@ ListService.delete = async (userId, id) => {
   await UserService.update(userId, user)
 }
 
-ListService.addMovie = async (userId, listId, movieId) => {
+ListService.addMovie = async (userId, listId, movie) => {
   const user = await UserService.getUserById(userId)
   const list = user.lists.find((list) => list._id.toString() === listId)
   if (!list) {
     throw new Error('List not found')
   }
-  if (list.movies.includes(movieId)) {
+  if (list.movies.includes(movie)) {
     throw new Error('Movie already in list')
   }
-  list.movies.push(movieId)
+  list.movies.push(movie)
   await UserService.update(userId, user)
   return list
 }
 
-ListService.removeMovie = async (userId, listId, movieId) => {
+ListService.removeMovie = async (userId, listId, movie) => {
   const user = await UserService.getUserById(userId)
   const list = user.lists.find((list) => list._id.toString() === listId)
   if (!list) {
     throw new Error('List not found')
   }
-  if (!list.movies.includes(movieId)) {
+  if (!list.movies.includes(movie)) {
     throw new Error('Movie not in list')
   }
-  list.movies = list.movies.filter((movie) => movie !== movieId)
+  list.movies = list.movies.filter((m) => m.id !== movie.id)
   await UserService.update(userId, user)
   return list
 }
 
-ListService.addTv = async (userId, listId, tvId) => {
+ListService.addTv = async (userId, listId, tv) => {
   const user = await UserService.getUserById(userId)
   const list = user.lists.find((list) => list._id.toString() === listId)
   if (!list) {
     throw new Error('List not found')
   }
-  if (list.tvShows.includes(tvId)) {
+  if (list.tvShows.includes(tv)) {
     throw new Error('Tv already in list')
   }
-  list.tvShows.push(tvId)
+  list.tvShows.push(tv)
   await UserService.update(userId, user)
   return list
 }
 
-ListService.removeTv = async (userId, listId, tvId) => {
+ListService.removeTv = async (userId, listId, tv) => {
   const user = await UserService.getUserById(userId)
   const list = user.lists.find((list) => list._id.toString() === listId)
   if (!list) {
     throw new Error('List not found')
   }
-  if (!list.tvShows.includes(tvId)) {
+  if (!list.tvShows.includes(tv)) {
     throw new Error('Tv not in list')
   }
-  list.tvShows = list.tvShows.filter((tv) => tv !== tvId)
+  list.tvShows = list.tvShows.filter((t) => t.id !== tv.id)
   await UserService.update(userId, user)
   return list
 }

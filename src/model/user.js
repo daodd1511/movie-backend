@@ -4,8 +4,8 @@ const { Schema } = mongoose
 const listSchema = new Schema({
   name: { type: String, nullable: false },
   description: { type: String, default: null },
-  movies: [Number],
-  tvShows: [Number]
+  movies: { type: Array, default: [] },
+  tvShows: { type: Array, default: [] }
 }, { timestamps: true })
 
 const userSchema = new Schema({
@@ -17,7 +17,6 @@ const userSchema = new Schema({
   password: { type: String, nullable: false },
   gender: { type: String },
   lists: [listSchema]
-  // role: { type: mongoose.Schema.Types.ObjectId, ref: "role" },
 })
 const User = mongoose.model('user', userSchema)
 export default User
