@@ -19,7 +19,8 @@ ListService.getListById = async (userId, id) => {
 ListService.create = async (userId, listDetail) => {
   const user = await UserService.getUserById(userId)
   user.lists.push(listDetail)
-  return await UserService.update(userId, user)
+  await UserService.update(userId, user)
+  return listDetail
 }
 
 ListService.update = async (userId, listId, listDetail) => {
