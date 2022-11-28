@@ -70,7 +70,7 @@ ListService.removeMovie = async (userId, listId, movie) => {
   if (!list) {
     throw new Error('List not found')
   }
-  if (!list.movies.includes(movie)) {
+  if (!list.movies.some((m) => m.id === movie.id)) {
     throw new Error('Movie not in list')
   }
   list.movies = list.movies.filter((m) => m.id !== movie.id)
@@ -98,7 +98,7 @@ ListService.removeTv = async (userId, listId, tv) => {
   if (!list) {
     throw new Error('List not found')
   }
-  if (!list.tvShows.includes(tv)) {
+  if (!list.tvShows.some((t) => t.id === tv.id)) {
     throw new Error('Tv not in list')
   }
   list.tvShows = list.tvShows.filter((t) => t.id !== tv.id)
