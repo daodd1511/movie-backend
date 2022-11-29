@@ -20,7 +20,7 @@ const getListById = async (req, res) => {
 
 const getListByUsername = async (req, res) => {
   try {
-    const list = await ListService.getListByUsername(req.body.username, req.body.listId)
+    const list = await ListService.getListByUsername(req.params.username, req.params.listId)
     res.status(200).send(list)
   } catch (error) {
     res.status(404).send({ message: error.message })

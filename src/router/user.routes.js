@@ -16,7 +16,7 @@ userRouter.get('/profile', verifyToken, (req, res) => {
   UserController.getUserById(req, res)
 })
 
-userRouter.get('/list', (req, res) => {
+userRouter.get('/list/:username/:listId', (req, res) => {
   ListController.getListByUsername(req, res)
 })
 // userRouter.delete(
