@@ -1,5 +1,6 @@
 import { verifyToken } from '../middleware/auth.middleware.js'
 import UserController from '../controller/user.controller.js'
+import ListController from '../controller/list.controller.js'
 import express from 'express'
 
 const userRouter = express.Router()
@@ -13,6 +14,10 @@ userRouter.put('/update/:id', verifyToken, (req, res) => {
 
 userRouter.get('/profile', verifyToken, (req, res) => {
   UserController.getUserById(req, res)
+})
+
+userRouter.get('/list', (req, res) => {
+  ListController.getListByUsername(req, res)
 })
 // userRouter.delete(
 //   '/delete/:id',

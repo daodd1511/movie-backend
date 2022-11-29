@@ -16,6 +16,15 @@ ListService.getListById = async (userId, id) => {
   return list
 }
 
+ListService.getListByUsername = async (username, listId) => {
+  const user = await UserService.getUserByUsername(username)
+  const list = user.lists.find((list) => list._id.toString() === listId)
+  if (!list) {
+    throw new Error('List not found')
+  }
+  return list
+}
+
 ListService.create = async (userId, listDetail) => {
   const user = await UserService.getUserById(userId)
   user.lists.push(listDetail)

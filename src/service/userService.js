@@ -7,6 +7,11 @@ UserService.getUserById = async (id) => {
   const result = await User.findOne({ _id: id }).select('-password')
   return result
 }
+
+UserService.getUserByUsername = async (username) => {
+  const result = await User.findOne({ username }).select('-password')
+  return result
+}
 UserService.update = async (id, updateData) => {
   if (updateData.password) {
     updateData.password = await bcrypt.hash(updateData.password, 10)

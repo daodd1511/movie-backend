@@ -18,6 +18,15 @@ const getListById = async (req, res) => {
   }
 }
 
+const getListByUsername = async (req, res) => {
+  try {
+    const list = await ListService.getListByUsername(req.body.username, req.body.listId)
+    res.status(200).send(list)
+  } catch (error) {
+    res.status(404).send({ message: error.message })
+  }
+}
+
 const create = async (req, res) => {
   try {
     const list = await ListService.create(req.userId, req.body)
@@ -99,7 +108,7 @@ const clearAll = async (req, res) => {
   }
 }
 
-const UserController = {
+const ListController = {
   getListById,
   create,
   getAll,
@@ -110,6 +119,7 @@ const UserController = {
   addTv,
   removeTv,
   clear,
-  clearAll
+  clearAll,
+  getListByUsername
 }
-export default UserController
+export default ListController
